@@ -18,7 +18,7 @@ import { ApprovalModal } from './components/ApprovalModal';
 import { TwinEditor } from './components/TwinEditor';
 import { DetailDrawer } from './components/DetailDrawer';
 import { Legend } from './components/Legend';
-import { Plane, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 export const App: React.FC = () => {
   const [twin, setTwin] = useState<TwinGraph>({ nodes: [], edges: [] });
@@ -166,8 +166,8 @@ export const App: React.FC = () => {
       {/* Top Header - Glassmorphism */}
       <header className="h-14 glass-header px-5 flex items-center justify-between z-30 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-blue-500/10 backdrop-blur-md border border-blue-400/20 text-blue-400 glow-blue">
-            <Plane className="w-5 h-5" />
+          <div className="w-9 h-9 rounded-xl overflow-hidden border border-blue-400/30 glow-blue shrink-0">
+            <img src="/cyber-bob.png" alt="Cyber Bob" className="w-full h-full object-cover" />
           </div>
           <div>
             <h1 className="text-sm font-bold tracking-tight text-white flex items-center gap-2">
