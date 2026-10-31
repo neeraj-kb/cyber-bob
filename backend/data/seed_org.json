@@ -1,0 +1,189 @@
+{
+  "nodes": [
+    {
+      "id": "web-01",
+      "label": "Public Web Server",
+      "type": "device",
+      "criticality": 3,
+      "is_entry": true,
+      "is_critical": false
+    },
+    {
+      "id": "vpn-gw",
+      "label": "Corporate VPN Gateway",
+      "type": "device",
+      "criticality": 3,
+      "is_entry": true,
+      "is_critical": false
+    },
+    {
+      "id": "admin-user",
+      "label": "DevOps Admin Identity",
+      "type": "identity",
+      "criticality": 2,
+      "is_entry": false,
+      "is_critical": false
+    },
+    {
+      "id": "svc-deployer",
+      "label": "CI/CD Service Account",
+      "type": "identity",
+      "criticality": 2,
+      "is_entry": false,
+      "is_critical": false
+    },
+    {
+      "id": "app-srv-01",
+      "label": "Customer Portal Backend",
+      "type": "app",
+      "criticality": 3,
+      "is_entry": false,
+      "is_critical": false
+    },
+    {
+      "id": "jump-host",
+      "label": "Internal Bastion Jump Host",
+      "type": "device",
+      "criticality": 3,
+      "is_entry": false,
+      "is_critical": false
+    },
+    {
+      "id": "auth-srv",
+      "label": "Identity & SSO Provider",
+      "type": "app",
+      "criticality": 4,
+      "is_entry": false,
+      "is_critical": true
+    },
+    {
+      "id": "cust-db-01",
+      "label": "Customer Production Database",
+      "type": "data",
+      "criticality": 5,
+      "is_entry": false,
+      "is_critical": true
+    },
+    {
+      "id": "fin-ledger-01",
+      "label": "Financial Ledger Database",
+      "type": "data",
+      "criticality": 5,
+      "is_entry": false,
+      "is_critical": true
+    },
+    {
+      "id": "backup-vault",
+      "label": "Encrypted Backup Vault",
+      "type": "data",
+      "criticality": 4,
+      "is_entry": false,
+      "is_critical": true
+    }
+  ],
+  "edges": [
+    {
+      "src": "web-01",
+      "dst": "app-srv-01",
+      "kind": "access",
+      "status": "confirmed",
+      "confidence": 0.95,
+      "last_seen": "2026-10-30T12:00:00Z",
+      "evidence_ids": ["ev-101", "ev-102"],
+      "business_weight": 4
+    },
+    {
+      "src": "app-srv-01",
+      "dst": "cust-db-01",
+      "kind": "dependency",
+      "status": "confirmed",
+      "confidence": 0.98,
+      "last_seen": "2026-10-31T08:00:00Z",
+      "evidence_ids": ["ev-103"],
+      "business_weight": 5
+    },
+    {
+      "src": "web-01",
+      "dst": "jump-host",
+      "kind": "trust",
+      "status": "needs_review",
+      "confidence": 0.45,
+      "last_seen": "2026-10-10T14:30:00Z",
+      "evidence_ids": ["ev-104"],
+      "business_weight": 2
+    },
+    {
+      "src": "jump-host",
+      "dst": "admin-user",
+      "kind": "access",
+      "status": "confirmed",
+      "confidence": 0.90,
+      "last_seen": "2026-10-29T16:00:00Z",
+      "evidence_ids": ["ev-105"],
+      "business_weight": 2
+    },
+    {
+      "src": "admin-user",
+      "dst": "fin-ledger-01",
+      "kind": "access",
+      "status": "confirmed",
+      "confidence": 0.88,
+      "last_seen": "2026-10-30T09:15:00Z",
+      "evidence_ids": ["ev-106"],
+      "business_weight": 3
+    },
+    {
+      "src": "web-01",
+      "dst": "svc-deployer",
+      "kind": "access",
+      "status": "confirmed",
+      "confidence": 0.82,
+      "last_seen": "2026-10-28T11:20:00Z",
+      "evidence_ids": ["ev-107"],
+      "business_weight": 2
+    },
+    {
+      "src": "svc-deployer",
+      "dst": "backup-vault",
+      "kind": "trust",
+      "status": "unknown",
+      "confidence": 0.05,
+      "last_seen": null,
+      "evidence_ids": [],
+      "business_weight": 1
+    },
+    {
+      "src": "vpn-gw",
+      "dst": "jump-host",
+      "kind": "trust",
+      "status": "confirmed",
+      "confidence": 0.92,
+      "last_seen": "2026-10-30T18:00:00Z",
+      "evidence_ids": ["ev-108"],
+      "business_weight": 3
+    },
+    {
+      "src": "app-srv-01",
+      "dst": "auth-srv",
+      "kind": "dependency",
+      "status": "confirmed",
+      "confidence": 0.94,
+      "last_seen": "2026-10-31T06:00:00Z",
+      "evidence_ids": ["ev-109"],
+      "business_weight": 4
+    }
+  ],
+  "incidents": [
+    {
+      "id": "inc-1",
+      "title": "Suspicious reverse shell and anomalous execution on web-01",
+      "compromised_nodes": ["web-01"]
+    },
+    {
+      "id": "inc-2",
+      "title": "Compromised administrative session on jump-host",
+      "compromised_nodes": ["jump-host"]
+    }
+  ]
+}
+

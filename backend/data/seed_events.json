@@ -1,0 +1,75 @@
+[
+  {
+    "id": "ev-101",
+    "timestamp": "2026-10-30T10:15:00Z",
+    "asset_id": "web-01",
+    "kind": "connection",
+    "detail": "Outbound HTTP API proxy connection established to app-srv-01:8080",
+    "supports_edge": ["web-01->app-srv-01"]
+  },
+  {
+    "id": "ev-102",
+    "timestamp": "2026-10-30T12:00:00Z",
+    "asset_id": "app-srv-01",
+    "kind": "connection",
+    "detail": "mTLS handshake successfully negotiated with web-01 client certificate",
+    "supports_edge": ["web-01->app-srv-01"]
+  },
+  {
+    "id": "ev-103",
+    "timestamp": "2026-10-31T08:00:00Z",
+    "asset_id": "cust-db-01",
+    "kind": "login",
+    "detail": "Database connection pool authorized from app-srv-01 internal subnet",
+    "supports_edge": ["app-srv-01->cust-db-01"]
+  },
+  {
+    "id": "ev-104",
+    "timestamp": "2026-10-10T14:30:00Z",
+    "asset_id": "jump-host",
+    "kind": "connection",
+    "detail": "Legacy SSH management connection from web-01. Stale connection; no recent telemetry",
+    "supports_edge": ["web-01->jump-host"]
+  },
+  {
+    "id": "ev-105",
+    "timestamp": "2026-10-29T16:00:00Z",
+    "asset_id": "jump-host",
+    "kind": "login",
+    "detail": "PAM authentication succeeded for admin-user with hardware token",
+    "supports_edge": ["jump-host->admin-user"]
+  },
+  {
+    "id": "ev-106",
+    "timestamp": "2026-10-30T09:15:00Z",
+    "asset_id": "fin-ledger-01",
+    "kind": "login",
+    "detail": "Database admin session opened by admin-user via SSH tunnel",
+    "supports_edge": ["admin-user->fin-ledger-01"]
+  },
+  {
+    "id": "ev-107",
+    "timestamp": "2026-10-28T11:20:00Z",
+    "asset_id": "web-01",
+    "kind": "process",
+    "detail": "Deployment token read by CI pipeline runner assumed identity svc-deployer",
+    "supports_edge": ["web-01->svc-deployer"]
+  },
+  {
+    "id": "ev-108",
+    "timestamp": "2026-10-30T18:00:00Z",
+    "asset_id": "vpn-gw",
+    "kind": "connection",
+    "detail": "IPSec tunnel established between vpn-gw and jump-host subnet",
+    "supports_edge": ["vpn-gw->jump-host"]
+  },
+  {
+    "id": "ev-109",
+    "timestamp": "2026-10-31T06:00:00Z",
+    "asset_id": "auth-srv",
+    "kind": "connection",
+    "detail": "OIDC token verification requests processed for app-srv-01 cluster",
+    "supports_edge": ["app-srv-01->auth-srv"]
+  }
+]
+
