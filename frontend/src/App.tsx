@@ -171,7 +171,7 @@ export const App: React.FC = () => {
           </div>
           <div>
             <h1 className="text-sm font-bold tracking-tight text-white flex items-center gap-2">
-              <span>Cybersecurity Flight Simulator</span>
+              <span>Cyber Bob</span>
               <span className="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono backdrop-blur-sm">
                 v1.0 • DETERMINISTIC CORE
               </span>
