@@ -147,7 +147,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           fontFamily: 'monospace',
         },
         labelBgStyle: {
-          fill: '#090d16',
+          fill: '#060a12',
           fillOpacity: 0.85,
         },
       };
@@ -155,7 +155,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
   }, [edges, activeAttackEdges, previewDefense]);
 
   return (
-    <div className="w-full h-full bg-[#090d16]">
+    <div className="w-full h-full bg-[#060a12]">
       <ReactFlow
         nodes={flowNodes}
         edges={flowEdges}
@@ -170,8 +170,8 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           if (original) onSelectEdge(original);
         }}
       >
-        <Background variant={BackgroundVariant.Dots} gap={16} size={1} color="#1e293b" />
-        <Controls className="!bg-slate-900 !border-slate-800 !text-slate-300" />
+        <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="rgba(148, 163, 184, 0.08)" />
+        <Controls />
         <MiniMap
           nodeColor={(n) => {
             const data = n.data as unknown as Node;
@@ -179,7 +179,6 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
             if (data?.is_entry) return '#06b6d4';
             return '#3b82f6';
           }}
-          className="!bg-slate-950 !border-slate-800"
         />
       </ReactFlow>
     </div>

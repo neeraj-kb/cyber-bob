@@ -21,7 +21,7 @@ export const RationalePanel: React.FC<RationalePanelProps> = ({
 }) => {
   if (isLoading) {
     return (
-      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-xl text-xs space-y-2 text-center text-slate-400">
+      <div className="glass-card p-5 text-xs space-y-2 text-center text-slate-400 animate-fade-in">
         <div className="inline-block animate-spin w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full mb-1" />
         <p>Synthesizing plain-language rationale from computed facts...</p>
       </div>
@@ -30,7 +30,7 @@ export const RationalePanel: React.FC<RationalePanelProps> = ({
 
   if (!explanation) {
     return (
-      <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 text-xs text-slate-400 text-center">
+      <div className="glass-card p-5 text-xs text-slate-400 text-center animate-fade-in">
         Run simulation to generate plain-language explanation and trade-off rationale.
       </div>
     );
@@ -39,9 +39,9 @@ export const RationalePanel: React.FC<RationalePanelProps> = ({
   const isGemini = explanation.mode === 'gemini';
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-xl space-y-3 text-xs">
+    <div className="glass-card p-4 space-y-3 text-xs animate-fade-in">
       {/* Header with Mode Badge */}
-      <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+      <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
         <div className="flex items-center gap-2">
           {isGemini ? (
             <Sparkles className="w-4 h-4 text-purple-400" />
@@ -52,10 +52,10 @@ export const RationalePanel: React.FC<RationalePanelProps> = ({
         </div>
 
         <span
-          className={`inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+          className={`inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border backdrop-blur-sm ${
             isGemini
-              ? 'bg-purple-950 text-purple-300 border-purple-800'
-              : 'bg-blue-950 text-blue-300 border-blue-800'
+              ? 'bg-purple-500/10 text-purple-300 border-purple-500/20'
+              : 'bg-blue-500/10 text-blue-300 border-blue-500/20'
           }`}
         >
           {isGemini ? <Bot className="w-3 h-3 text-purple-400" /> : <FileText className="w-3 h-3 text-blue-400" />}
@@ -64,7 +64,7 @@ export const RationalePanel: React.FC<RationalePanelProps> = ({
       </div>
 
       {/* Summary */}
-      <div className="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80 text-slate-300 leading-relaxed">
+      <div className="glass-subtle p-3 rounded-xl text-slate-300 leading-relaxed">
         {explanation.summary}
       </div>
 
@@ -74,25 +74,25 @@ export const RationalePanel: React.FC<RationalePanelProps> = ({
       </div>
 
       {/* Missing Visibility / Uncertainty Warning */}
-      <div className="bg-amber-950/30 border border-amber-500/40 rounded-lg p-3 text-amber-200 space-y-1">
+      <div className="bg-amber-500/[0.06] backdrop-blur-md border border-amber-500/20 rounded-xl p-3 text-amber-200 space-y-1">
         <div className="flex items-center gap-1.5 font-bold text-amber-400">
           <AlertTriangle className="w-4 h-4 text-amber-400" />
           <span>Core Safety Principle</span>
         </div>
-        <p className="text-[11px] leading-relaxed text-amber-100/90">
+        <p className="text-[11px] leading-relaxed text-amber-100/80">
           {explanation.uncertainty_warning}
         </p>
       </div>
 
       {/* Supporting Evidence Citations */}
       {explanation.evidence_cited && explanation.evidence_cited.length > 0 && (
-        <div className="border-t border-slate-800 pt-2 flex items-center gap-2 flex-wrap">
-          <span className="text-[11px] text-slate-400 font-mono">Evidence Cited:</span>
+        <div className="border-t border-white/[0.06] pt-2 flex items-center gap-2 flex-wrap">
+          <span className="text-[11px] text-slate-400/80 font-mono">Evidence Cited:</span>
           {explanation.evidence_cited.map((evId) => (
             <button
               key={evId}
               onClick={() => onSelectEvidence && onSelectEvidence(evId)}
-              className="inline-flex items-center gap-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-sky-300 text-[11px] font-mono px-2 py-0.5 rounded transition"
+              className="inline-flex items-center gap-1 glass-btn text-sky-300 text-[11px] font-mono px-2 py-0.5 rounded-lg transition"
             >
               <span>{evId}</span>
               <ExternalLink className="w-2.5 h-2.5 text-slate-400" />

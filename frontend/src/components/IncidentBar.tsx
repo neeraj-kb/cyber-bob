@@ -26,7 +26,7 @@ export const IncidentBar: React.FC<IncidentBarProps> = ({
   baselineUncertainCount,
 }) => {
   return (
-    <div className="bg-slate-900/80 border-b border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+    <div className="glass border-b border-white/[0.06] px-5 py-2.5 flex flex-wrap items-center justify-between gap-3">
       {/* Incident Selection */}
       <div className="flex items-center gap-3">
         <label htmlFor="incident-select" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
@@ -37,10 +37,10 @@ export const IncidentBar: React.FC<IncidentBarProps> = ({
           id="incident-select"
           value={selectedIncidentId}
           onChange={(e) => onSelectIncident(e.target.value)}
-          className="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
+          className="glass-input rounded-lg px-3 py-1.5 text-xs text-slate-100 focus:outline-none font-medium"
         >
           {incidents.map((inc) => (
-            <option key={inc.id} value={inc.id}>
+            <option key={inc.id} value={inc.id} className="bg-slate-900">
               [{inc.id.toUpperCase()}] {inc.title}
             </option>
           ))}
@@ -50,7 +50,7 @@ export const IncidentBar: React.FC<IncidentBarProps> = ({
         <button
           onClick={onRunSimulation}
           disabled={isLoading}
-          className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-3.5 py-1.5 rounded-lg shadow-md shadow-blue-900/30 transition disabled:opacity-50"
+          className="flex items-center gap-1.5 glass-btn-primary text-white font-semibold text-xs px-4 py-2 rounded-lg disabled:opacity-50"
         >
           <Play className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : 'fill-white'}`} />
           <span>{isLoading ? 'Simulating...' : 'Run Flight Simulation'}</span>
@@ -59,14 +59,14 @@ export const IncidentBar: React.FC<IncidentBarProps> = ({
 
       {/* Metrics Banner */}
       {baselineConfirmedCount !== undefined && (
-        <div className="hidden md:flex items-center gap-3 bg-slate-950/80 border border-slate-800 px-3 py-1 rounded-lg text-xs">
-          <div className="flex items-center gap-1 text-rose-400">
-            <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+        <div className="hidden md:flex items-center gap-3 glass-subtle px-3 py-1.5 rounded-xl text-xs">
+          <div className="flex items-center gap-1.5 text-rose-400">
+            <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse shadow-lg shadow-rose-500/50" />
             <span className="font-semibold">{baselineConfirmedCount}</span>
             <span className="text-slate-400">Confirmed Path{baselineConfirmedCount !== 1 ? 's' : ''}</span>
           </div>
-          <span className="text-slate-700">|</span>
-          <div className="flex items-center gap-1 text-amber-400">
+          <span className="text-white/10">|</span>
+          <div className="flex items-center gap-1.5 text-amber-400">
             <AlertTriangle className="w-3 h-3 text-amber-400" />
             <span className="font-semibold">{baselineUncertainCount ?? 0}</span>
             <span className="text-slate-400">Uncertain Path{(baselineUncertainCount ?? 0) !== 1 ? 's' : ''}</span>
@@ -78,7 +78,7 @@ export const IncidentBar: React.FC<IncidentBarProps> = ({
       <div className="flex items-center gap-2">
         <button
           onClick={onToggleTwinEditor}
-          className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs px-3 py-1.5 rounded-lg transition"
+          className="flex items-center gap-1.5 glass-btn text-slate-200 text-xs px-3 py-1.5 rounded-lg"
           title="Add or edit nodes and edges"
         >
           <Edit3 className="w-3.5 h-3.5 text-slate-400" />
@@ -87,7 +87,7 @@ export const IncidentBar: React.FC<IncidentBarProps> = ({
 
         <button
           onClick={onResetTwin}
-          className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs px-3 py-1.5 rounded-lg transition"
+          className="flex items-center gap-1.5 glass-btn text-slate-300 text-xs px-3 py-1.5 rounded-lg"
           title="Reset twin graph to initial seed state"
         >
           <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
@@ -97,4 +97,3 @@ export const IncidentBar: React.FC<IncidentBarProps> = ({
     </div>
   );
 };
-

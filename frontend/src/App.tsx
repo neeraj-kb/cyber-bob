@@ -162,21 +162,21 @@ export const App: React.FC = () => {
     : undefined;
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#090d16] text-slate-100 font-sans">
-      {/* Top Header */}
-      <header className="h-13 bg-slate-950 border-b border-slate-800 px-4 flex items-center justify-between z-30 shrink-0">
-        <div className="flex items-center gap-2.5">
-          <div className="p-1.5 rounded-lg bg-blue-600/20 border border-blue-500/40 text-blue-400">
+    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#060a12] text-slate-100 font-sans">
+      {/* Top Header - Glassmorphism */}
+      <header className="h-14 glass-header px-5 flex items-center justify-between z-30 shrink-0">
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-xl bg-blue-500/10 backdrop-blur-md border border-blue-400/20 text-blue-400 glow-blue">
             <Plane className="w-5 h-5" />
           </div>
           <div>
             <h1 className="text-sm font-bold tracking-tight text-white flex items-center gap-2">
               <span>Cybersecurity Flight Simulator</span>
-              <span className="text-[10px] bg-blue-950 text-blue-400 border border-blue-800 px-1.5 py-0.2 rounded font-mono">
+              <span className="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono backdrop-blur-sm">
                 v1.0 • DETERMINISTIC CORE
               </span>
             </h1>
-            <p className="text-[10px] text-slate-400">
+            <p className="text-[10px] text-slate-400/80">
               Deterministic Traversal • Counterfactual Branching • AI Explains • Human Decides
             </p>
           </div>
@@ -184,7 +184,7 @@ export const App: React.FC = () => {
 
         <div className="flex items-center gap-3">
           {verificationResult?.passed && (
-            <span className="text-xs bg-emerald-950 text-emerald-300 border border-emerald-800 px-2.5 py-1 rounded-full font-semibold flex items-center gap-1.5">
+            <span className="text-xs bg-emerald-500/10 backdrop-blur-md text-emerald-300 border border-emerald-500/20 px-3 py-1.5 rounded-full font-semibold flex items-center gap-1.5 glow-emerald">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
               Verified Clean Twin
             </span>
@@ -207,15 +207,15 @@ export const App: React.FC = () => {
 
       {/* Error alert if any */}
       {errorMsg && (
-        <div className="bg-rose-950/80 border-b border-rose-800 px-4 py-1.5 text-xs text-rose-300 flex items-center gap-2">
+        <div className="glass border-b border-rose-500/20 bg-rose-500/5 px-5 py-2 text-xs text-rose-300 flex items-center gap-2">
           <AlertCircle className="w-4 h-4 text-rose-400" />
           <span>{errorMsg}</span>
         </div>
       )}
 
       {/* Main Workspace Split View */}
-      <div className="flex-1 flex overflow-hidden relative">
-        {/* Left Side: React Flow Digital Twin Canvas (60%) */}
+      <div className="flex-1 flex overflow-hidden relative gap-0">
+        {/* Left Side: React Flow Digital Twin Canvas */}
         <div className="flex-1 h-full relative">
           <GraphCanvas
             nodes={twin.nodes}
@@ -249,8 +249,8 @@ export const App: React.FC = () => {
           />
         </div>
 
-        {/* Right Side: Analysis & Decision Sidebar (40%) */}
-        <div className="w-[480px] border-l border-slate-800 bg-slate-950/95 overflow-y-auto p-4 space-y-4 shrink-0 shadow-2xl">
+        {/* Right Side: Analysis & Decision Sidebar */}
+        <div className="w-[440px] xl:w-[480px] glass-strong border-l border-white/[0.06] overflow-y-auto p-4 space-y-4 shrink-0">
           {/* Comparison Matrix Component */}
           <ComparisonTable
             defenses={currentRun?.candidate_defenses || []}

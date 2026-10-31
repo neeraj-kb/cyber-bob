@@ -46,10 +46,10 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
 
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fade-in">
+      <div className="glass-strong rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] glow-blue">
         {/* Modal Header */}
-        <div className="flex items-center justify-between p-4 border-b border-slate-800 bg-slate-900/90">
+        <div className="flex items-center justify-between p-4 border-b border-white/[0.06] glass-header">
           <div className="flex items-center gap-2">
             <FileCheck className="w-5 h-5 text-emerald-400" />
             <h3 className="font-semibold text-slate-100 text-sm">
@@ -58,7 +58,7 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-200 transition p-1 rounded-lg hover:bg-slate-800"
+            className="text-slate-400 hover:text-slate-200 transition p-1.5 rounded-lg hover:bg-white/[0.08]"
           >
             <X className="w-4 h-4" />
           </button>
@@ -68,12 +68,12 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
         <div className="p-5 overflow-y-auto space-y-4 text-xs">
           {verificationResult ? (
             /* Post-Approval Verification Banner */
-            <div className="space-y-4 animate-fade-in">
+            <div className="space-y-4 animate-slide-up">
               <div
-                className={`p-4 rounded-xl border ${
+                className={`p-4 rounded-xl border backdrop-blur-sm ${
                   verificationResult.passed
-                    ? 'bg-emerald-950/40 border-emerald-500/50 text-emerald-200'
-                    : 'bg-rose-950/40 border-rose-500/50 text-rose-200'
+                    ? 'bg-emerald-500/[0.08] border-emerald-500/20 text-emerald-200 glow-emerald'
+                    : 'bg-rose-500/[0.08] border-rose-500/20 text-rose-200 glow-rose'
                 }`}
               >
                 <div className="flex items-center gap-2 font-bold text-sm mb-1">
@@ -92,8 +92,8 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
               </div>
 
               {/* Residual Status Checklist */}
-              <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800 space-y-2">
-                <div className="font-semibold text-slate-200 border-b border-slate-800 pb-1">
+              <div className="glass-subtle p-3 rounded-xl space-y-2">
+                <div className="font-semibold text-slate-200 border-b border-white/[0.06] pb-1">
                   Verification Metrics:
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-slate-300">
@@ -106,7 +106,7 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
                 </div>
 
                 {verificationResult.uncertain_paths_left > 0 && (
-                  <div className="mt-2 text-amber-300 flex items-start gap-1.5 text-[11px] bg-amber-950/30 p-2 rounded border border-amber-900/60">
+                  <div className="mt-2 text-amber-300 flex items-start gap-1.5 text-[11px] bg-amber-500/[0.06] backdrop-blur-sm p-2 rounded-lg border border-amber-500/20">
                     <AlertTriangle className="w-3.5 h-3.5 mt-0.5 text-amber-400 shrink-0" />
                     <span>
                       Residual uncertain paths remain active. As visibility is missing, safe operation cannot be proven until telemetry is refreshed.
@@ -118,7 +118,7 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
               <div className="flex justify-end pt-2">
                 <button
                   onClick={onClose}
-                  className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg text-xs"
+                  className="glass-btn-primary text-white font-semibold px-4 py-2 rounded-lg text-xs"
                 >
                   Done (View Updated Twin)
                 </button>
@@ -126,7 +126,7 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
             </div>
           ) : (
             /* Approval Form */
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4 animate-fade-in">
               <div className="text-slate-300 leading-relaxed">
                 As part of non-negotiable principle #3 (<strong>Human decides</strong>), please review and explicitly approve an intervention to apply to the digital twin.
               </div>
@@ -139,10 +139,10 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
                 {candidateDefenses.map((d) => (
                   <label
                     key={d.defense_id}
-                    className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition ${
+                    className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${
                       selectedDefenseId === d.defense_id
-                        ? 'bg-blue-950/40 border-blue-500 ring-1 ring-blue-500'
-                        : 'bg-slate-950/50 border-slate-800 hover:bg-slate-800/40'
+                        ? 'bg-blue-500/[0.08] border-blue-500/30 ring-1 ring-blue-500/30 backdrop-blur-sm'
+                        : 'glass-subtle hover:bg-white/[0.06]'
                     }`}
                   >
                     <input
@@ -157,12 +157,12 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
                       <div className="flex items-center justify-between">
                         <span className="font-semibold text-slate-100">{d.name}</span>
                         {d.rank && (
-                          <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 border border-slate-700">
+                          <span className="text-[10px] glass-btn px-1.5 py-0.5 rounded-lg text-amber-300">
                             Rank #{d.rank}
                           </span>
                         )}
                       </div>
-                      <div className="text-[11px] text-slate-400 mt-0.5">
+                      <div className="text-[11px] text-slate-400/70 mt-0.5">
                         Confirmed left: {d.confirmed_paths_left} | Uncertain left: {d.uncertain_paths_left} | Disruption: {d.disruption} | Effort: {d.effort}/5
                       </div>
                     </div>
@@ -181,23 +181,23 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
                   rows={3}
                   required
                   placeholder="Record business context or reason for selecting this remediation..."
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full glass-input rounded-lg p-2.5 text-xs text-slate-100 focus:outline-none"
                 />
               </div>
 
               {/* Action buttons */}
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-white/[0.06]">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium"
+                  className="px-3.5 py-2 rounded-lg glass-btn text-slate-300 font-medium"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow-md transition disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg bg-emerald-600/80 hover:bg-emerald-500/90 backdrop-blur-sm text-white font-semibold shadow-lg shadow-emerald-500/20 transition-all duration-200 disabled:opacity-50"
                 >
                   {isSubmitting ? 'Simulating Intervention...' : 'Approve & Apply to Twin'}
                 </button>

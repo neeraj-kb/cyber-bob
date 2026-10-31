@@ -28,26 +28,26 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
 
   if (!defenses || defenses.length === 0) {
     return (
-      <div className="p-4 text-center text-slate-400 text-xs bg-slate-900/50 rounded-xl border border-slate-800">
+      <div className="glass-card p-5 text-center text-slate-400 text-xs animate-fade-in">
         Run simulation to generate candidate defenses and comparison matrix.
       </div>
     );
   }
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-xl space-y-3">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+    <div className="glass-card p-4 space-y-3 animate-fade-in">
+      <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
         <div className="flex items-center gap-2">
           <Award className="w-4 h-4 text-amber-400" />
           <h3 className="text-sm font-semibold text-slate-100">Candidate Defenses (Simulated Counterfactuals)</h3>
         </div>
-        <span className="text-[11px] text-slate-400 font-mono">3 Options Evaluated</span>
+        <span className="text-[11px] text-slate-400/80 font-mono">{defenses.length} Options Evaluated</span>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs">
           <thead>
-            <tr className="border-b border-slate-800 text-slate-400 font-mono text-[11px]">
+            <tr className="border-b border-white/[0.06] text-slate-400/80 font-mono text-[11px]">
               <th className="py-2 px-2">Rank</th>
               <th className="py-2 px-2">Candidate Action</th>
               <th className="py-2 px-2 text-center">Confirmed Left</th>
@@ -58,7 +58,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
               <th className="py-2 px-2 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800/60 font-medium">
+          <tbody className="divide-y divide-white/[0.04] font-medium">
             {defenses.map((d) => {
               const isRecommended = d.defense_id === recommendedId;
               const isPreviewing = d.defense_id === selectedPreviewId;
@@ -67,12 +67,12 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
               return (
                 <React.Fragment key={d.defense_id}>
                   <tr
-                    className={`transition-colors ${
+                    className={`transition-all duration-200 ${
                       isRecommended
-                        ? 'bg-blue-950/30 hover:bg-blue-950/50'
+                        ? 'bg-blue-500/[0.06] hover:bg-blue-500/[0.10]'
                         : isPreviewing
-                        ? 'bg-slate-800/40 hover:bg-slate-800/60'
-                        : 'hover:bg-slate-800/30'
+                        ? 'bg-white/[0.04] hover:bg-white/[0.06]'
+                        : 'hover:bg-white/[0.03]'
                     }`}
                   >
                     {/* Rank */}
@@ -81,8 +81,8 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                         <span
                           className={`inline-flex items-center justify-center w-6 h-6 rounded-full font-bold text-xs ${
                             d.rank === 1
-                              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
-                              : 'bg-slate-800 text-slate-300 border border-slate-700'
+                              ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30 glow-amber'
+                              : 'bg-white/[0.05] text-slate-300 border border-white/[0.10]'
                           }`}
                         >
                           #{d.rank}
@@ -95,7 +95,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                     {/* Candidate Name & Rationale snippet */}
                     <td className="py-2.5 px-2">
                       <div className="font-semibold text-slate-200">{d.name}</div>
-                      <div className="text-[10px] text-slate-400 truncate max-w-xs" title={d.ranking_reason}>
+                      <div className="text-[10px] text-slate-400/70 truncate max-w-xs" title={d.ranking_reason}>
                         {d.ranking_reason}
                       </div>
                     </td>
@@ -103,10 +103,10 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                     {/* Confirmed Paths Left */}
                     <td className="py-2.5 px-2 text-center font-mono">
                       <span
-                        className={`px-2 py-0.5 rounded font-bold ${
+                        className={`px-2 py-0.5 rounded-md font-bold backdrop-blur-sm ${
                           d.confirmed_paths_left === 0
-                            ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
-                            : 'bg-rose-950 text-rose-300 border border-rose-800'
+                            ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20'
+                            : 'bg-rose-500/10 text-rose-300 border border-rose-500/20'
                         }`}
                       >
                         {d.confirmed_paths_left}
@@ -116,10 +116,10 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                     {/* Uncertain Paths Left */}
                     <td className="py-2.5 px-2 text-center font-mono">
                       <span
-                        className={`px-2 py-0.5 rounded ${
+                        className={`px-2 py-0.5 rounded-md ${
                           d.uncertain_paths_left === 0
-                            ? 'bg-slate-950 text-slate-400'
-                            : 'bg-amber-950 text-amber-300 border border-amber-800'
+                            ? 'bg-white/[0.03] text-slate-400'
+                            : 'bg-amber-500/10 text-amber-300 border border-amber-500/20'
                         }`}
                       >
                         {d.uncertain_paths_left}
@@ -130,7 +130,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                     <td className="py-2.5 px-2 text-center">
                       <button
                         onClick={() => setExpandedBreakdownId(isExpanded ? null : d.defense_id)}
-                        className="inline-flex items-center gap-1 font-mono font-bold text-slate-200 hover:text-blue-400"
+                        className="inline-flex items-center gap-1 font-mono font-bold text-slate-200 hover:text-blue-400 transition-colors"
                         title="Click to view disruption breakdown"
                       >
                         <span>{d.disruption}</span>
@@ -167,10 +167,10 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                       {/* Preview toggle */}
                       <button
                         onClick={() => onSelectPreview(isPreviewing ? null : d.defense_id)}
-                        className={`text-[11px] px-2.5 py-1 rounded border transition ${
+                        className={`text-[11px] px-2.5 py-1 rounded-lg transition-all duration-200 ${
                           isPreviewing
-                            ? 'bg-sky-600 border-sky-500 text-white font-semibold'
-                            : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'
+                            ? 'bg-sky-500/20 border border-sky-400/30 text-sky-300 font-semibold backdrop-blur-sm'
+                            : 'glass-btn text-slate-300'
                         }`}
                         title="Preview counterfactual impact on graph canvas"
                       >
@@ -183,7 +183,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                       {/* Approve button */}
                       <button
                         onClick={() => onOpenApproval(d)}
-                        className="text-[11px] px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow transition"
+                        className="text-[11px] px-2.5 py-1 rounded-lg bg-emerald-600/80 hover:bg-emerald-500/90 backdrop-blur-sm text-white font-semibold shadow-lg shadow-emerald-500/20 transition-all duration-200"
                       >
                         Approve
                       </button>
@@ -192,11 +192,11 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
 
                   {/* Disruption Breakdown Accordion */}
                   {isExpanded && (
-                    <tr className="bg-slate-950/70 border-b border-slate-800">
+                    <tr className="bg-white/[0.02]">
                       <td colSpan={8} className="p-3 text-[11px]">
-                        <div className="space-y-1.5 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 font-mono">
+                        <div className="space-y-1.5 glass-subtle p-3 rounded-xl font-mono animate-fade-in">
                           <div className="font-semibold text-slate-300">Disruption Breakdown Formula:</div>
-                          <div className="text-slate-400">
+                          <div className="text-slate-400/80">
                             Total Disruption = Sum(Severed Edge Weights) + Sum(Orphaned Node Criticality)
                           </div>
                           <div className="grid grid-cols-2 gap-3 pt-1">
