@@ -52,7 +52,34 @@ Visit **`http://localhost:5173`** in your browser.
 
 ---
 
-## 4. Running the Automated Test Suite
+## 4. Deploying to Vercel
+
+The repository is pre-configured with full-stack monorepo settings for Vercel:
+- **Frontend**: Built automatically from `frontend/` into `frontend/dist`.
+- **Backend API**: Exposed as a Python Serverless Function via [`api/index.py`](file:///c:/Users/Neeraj/OneDrive/Desktop/Kodikon_6.0/api/index.py) routing all `/api/*` traffic to FastAPI.
+- **Serverless SQLite**: Uses system `/tmp` on serverless execution with automatic seed loading.
+
+### Option A: Deploy via GitHub (Recommended)
+1. Push your repository to GitHub:
+   ```bash
+   git add .
+   git commit -m "Configure full-stack deployment for Vercel"
+   git push origin main
+   ```
+2. Go to [vercel.com](https://vercel.com) $\rightarrow$ **Add New Project** $\rightarrow$ Import your GitHub repository.
+3. Keep default settings (Vercel automatically detects [`vercel.json`](file:///c:/Users/Neeraj/OneDrive/Desktop/Kodikon_6.0/vercel.json)).
+4. (Optional) In Project Settings $\rightarrow$ Environment Variables, set `GEMINI_API_KEY` if you wish to enable Gemini 2.5 explanations.
+5. Click **Deploy**.
+
+### Option B: Deploy via Vercel CLI
+```bash
+npm install -g vercel
+vercel
+```
+
+---
+
+## 5. Running the Automated Test Suite
 
 From the root repository directory:
 ```bash

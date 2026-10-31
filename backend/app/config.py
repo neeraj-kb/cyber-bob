@@ -1,11 +1,17 @@
 """Configuration and scoring constants for Cybersecurity Flight Simulator."""
 from pathlib import Path
 import os
+import tempfile
 
 # Base paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
-DB_PATH = os.getenv("DB_PATH", str(BASE_DIR / "twin_state.db"))
+
+# On Vercel / serverless runtime, filesystem is read-only except system tempdir (/tmp on Linux)
+if os.getenv("VERCEL"):
+    DB_PATH = os.getenv("DB_PATH", str(Path(tempfile.gettempdir()) / "twin_state.db"))
+else:
+    DB_PATH = os.getenv("DB_PATH", str(BASE_DIR / "twin_state.db"))
 
 # Graph Traversal Limits
 DEFAULT_PATH_CUTOFF = 8

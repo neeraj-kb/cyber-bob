@@ -1,0 +1,32 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.pytest_cache/
+
+# Databases
+*.db
+*.sqlite3
+twin_state.db
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel
+.vercel/
+
+# OS
+.DS_Store
+Thumbs.db
+
